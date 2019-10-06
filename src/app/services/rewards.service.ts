@@ -59,6 +59,7 @@ export class RewardsService {
     this.firestore.collection('rewards').doc('JCquZ1v2AhC16Z0LhFsk').update({
       title: 'Pizza'
     }).then( res => {console.log('Reward updated'); })
+    // tslint:disable-next-line:only-arrow-functions
         .catch(function(error) {
           console.error('Error updating reward', error);
         });

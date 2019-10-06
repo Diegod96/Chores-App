@@ -29,8 +29,9 @@ export class ParentService {
     this.children.push(child);
   }
 
-  // deleteChild(child) {
-  //   this.children.pop(child);
-  // }
+  deleteChild(child) {
+    const index = this.children.indexOf(child)
+    this.children.splice(index, 1);
+  }
 
 }
