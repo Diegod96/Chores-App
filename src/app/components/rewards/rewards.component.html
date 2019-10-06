@@ -1,0 +1,41 @@
+<div id="container">
+
+    <h1>Rewards<span style="float: right" class="badge badge-pill badge-success">
+                {{points}} pts
+            </span></h1>
+
+    <select *ngIf="user=='parent'" class="custom-select custom-select-lg mb-3">
+        <option selected>Select Child:</option>
+        <option *ngFor="let child of children" value="1">{{child.name}}</option>
+    </select>
+
+    <ul>
+        <li *ngFor="let reward of rewards">
+            <button (click)="edit(reward.title)">Edit</button>
+
+            <button *ngIf="user=='child'" [disabled]="points<reward.points" (click)="redeem(reward.points, reward)">Redeem!</button>
+                        {{reward.title}}
+            <span data-toggle="collapse" href="#collapse">Read More...</span>
+
+
+<!--            //COLLAPSE BUG NEEDS FIXING-->
+
+            <span class="badge badge-pill badge-success">
+                {{reward.points}}
+            </span>
+
+
+            <div class="collapse" id="collapse">
+                <div class="card card-body">
+                    {{reward.description}}
+                </div>
+            </div>
+        </li>
+        <li *ngIf="user=='parent'" id="add">
+            <h1 routerLink="/add-reward">ADD REWARD</h1>
+        </li>
+
+    </ul>
+
+</div>
+

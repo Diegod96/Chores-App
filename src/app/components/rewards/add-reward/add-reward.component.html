@@ -1,0 +1,22 @@
+<div class="form">
+    <h1>Add a New Reward</h1>
+    <form [formGroup]="add" (ngSubmit)="onAdd(add)">
+        <div class="form-group">
+            <label>Title: </label>
+            <input placeholder="Title"
+                   formControlName="title"
+                   required>
+            <br>
+            <label>Description: </label>
+            <textarea placeholder="Description of reward..."
+                      formControlName="description"></textarea>
+            <br>
+
+            <label>Points: </label>
+            <input type="number"
+                   formControlName="points"
+                   required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

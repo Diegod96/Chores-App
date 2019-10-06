@@ -1,0 +1,40 @@
+
+<div class="form">
+    <h1>Sign Up</h1>
+    <form [formGroup]="signUp" (ngSubmit)="onSignUp(signUp)">
+        <div class="form-group">
+            <label>Username: </label>
+            <input placeholder="username"
+                   formControlName="username"
+                   required>
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label>First Name: </label>
+            <input placeholder="first name"
+                   formControlName="firstName"
+                   required>
+            <br>
+        </div>
+
+        <div class="form-group">
+            <label>Last Name: </label>
+            <input placeholder="last name"
+                   formControlName="lastName"
+                   required>
+            <br>
+        </div>
+
+
+        <div class="form-group">
+            <label>Password: </label>
+            <input type="password"
+                   placeholder="password"
+                   formControlName="password"
+                   required>
+            <br>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

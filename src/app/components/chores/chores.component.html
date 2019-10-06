@@ -1,0 +1,80 @@
+<!-- <div id="container">
+
+    <h1>Chores</h1>
+
+    <select *ngIf="user=='parent'" class="custom-select custom-select-lg mb-3">
+        <option selected>Select Child:</option>
+        <option *ngFor="let child of children" value="1">{{child.name}}</option>
+    </select>
+
+    <ul>
+        <li *ngFor="let chore of chores">
+            <button *ngIf="chore.status=='pending'" (click)="complete(chore, chore.points)" [disabled]="user=='child'">Pending Approval</button>
+            <button *ngIf="chore.status=='scheduled'" (click)="pending(chore)">Complete?</button>
+
+
+            <span data-toggle="collapse" href="#collapse">{{chore.title}}</span>
+            <span class="right">Due: {{chore.due |  date:'EEEE MMM d, y, h:mm:ss a'}}
+                <span class="badge badge-pill badge-success">{{chore.points}}pts</span>
+            </span>
+            <div class="collapse" id="collapse">
+                <div class="card card-body">
+                    {{chore.description}}
+                </div>
+            </div>
+        </li>
+
+        <li *ngIf="user=='parent'" id="add">
+            <h1 routerLink="/add-chore">ADD</h1>
+        </li>
+
+
+
+
+
+    </ul>
+
+
+</div>
+ -->
+
+
+<div id="container">
+
+    <h1>Chores</h1>
+
+    <select *ngIf="user=='parent'" class="custom-select custom-select-lg mb-3">
+        <option selected>Select Child:</option>
+        <option *ngFor="let child of children" value="1">{{child.name}}</option>
+    </select>
+
+    <ul>
+        <li *ngFor="let chore of chores">
+            <button *ngIf=" chore.payload.doc.data().status=='pending'" (click)="complete(chore, chore.payload.doc.data().points)" [disabled]="user=='child'">Pending Approval</button>
+            <button *ngIf="chore.payload.doc.data().status=='scheduled'" (click)="pending(chore)">Complete?</button>
+
+
+            <span data-toggle="collapse" href="#collapse">{{chore.payload.doc.data().title}}</span>
+            <span class="right">Due: {{chore.payload.doc.data().due |  date:'EEEE MMM d, y, h:mm:ss a'}}
+                <span class="badge badge-pill badge-success">{{chore.payload.doc.data().points}}pts</span>
+            </span>
+            <div class="collapse" id="collapse">
+                <div class="card card-body">
+                    {{chore.payload.doc.data().description}}
+                </div>
+            </div>
+        </li>
+
+        <li *ngIf="user=='parent'" id="add">
+            <h1 routerLink="/add-chore">ADD</h1>
+        </li>
+
+
+
+
+
+    </ul>
+
+
+</div>
+

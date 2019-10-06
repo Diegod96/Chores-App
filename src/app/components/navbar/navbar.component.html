@@ -1,0 +1,20 @@
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" routerLink="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" routerLink="chores">Chores</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"  routerLink="rewards">Rewards</a>
+    </li>
+<!--    <li class="nav-item">-->
+<!--        <span class="badge badge-pill badge-success">{{points}}pts</span>-->
+<!--    </li>-->
+
+    <li *ngIf="user == 'parent'" class="nav-item">
+        <a class="nav-link" routerLink="manage">Manage</a>
+    </li>
+
+</ul>
+

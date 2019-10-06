@@ -1,0 +1,13 @@
+<div class="container center" *ngIf="selected===false">
+    <div class="row">
+        <div class="col-sm buttons" (click)="select('signUp')">
+            Sign Up
+        </div>
+        <div class="col-sm buttons" (click)="select('parent-login')">
+            Login
+        </div>
+    </div>
+</div>
+
+<app-login *ngIf="login===true"></app-login>
+<app-sign-up-parent *ngIf="signUp===true"></app-sign-up-parent>
