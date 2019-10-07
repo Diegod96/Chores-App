@@ -21,7 +21,7 @@ export class AuthService {
   signUpParent(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(
-      response =>{
+      response => {
         firebase.auth().currentUser.getIdToken().then(
           (token: string) => {
               this.token = token;
@@ -32,7 +32,7 @@ export class AuthService {
           });
         });
       }
-    
+
 
 
 
