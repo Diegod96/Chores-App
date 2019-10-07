@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.loginParent(email, password);
+    this.authService.login(email, password);
 
     console.log(email, password);
     this.router.navigate(['chores']);

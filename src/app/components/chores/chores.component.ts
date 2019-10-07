@@ -68,7 +68,7 @@ export class ChoresComponent implements OnInit {
               private authService: AuthService,
               private parentService: ParentService) {
     this.user= authService.user;
-    this.children= parentService.children;
+    // this.children= parentService.children;
   }
 
 getChores = () =>
@@ -76,9 +76,14 @@ getChores = () =>
             this.chores = res
         ))
 
+getChildren = () =>
+        this.parentService.getChildren().subscribe(res => (
+            this.children = res
+        ))
 
     ngOnInit() {
         this.getChores();
+        this.getChildren();
     }
 
   complete(chore, points) {

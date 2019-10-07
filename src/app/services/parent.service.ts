@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-// import {AngularFirestore} from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -23,14 +24,36 @@ export class ParentService {
      }
    ];
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private firestore: AngularFirestore) { }
 
-  signUpChild(child) {
-    this.children.push(child);
-  }
+
+   addChild(childEmail, childName){
+    this.firestore.collection('family')
+    .add({
+      parentID: this.authService.uid,
+      email: childEmail,
+      name: childName
+    })
+    .then(function() {
+      console.log('Document successfully written!');
+    })
+    .catch(function(error) {
+      console.error('Error writing document: ', error);
+    });
+   }
+
+
+
 
   // deleteChild(child) {
   //   this.children.pop(child);
   // }
+
+
+  getChildren() {
+    return this.firestore.collection('family', ref => ref.where('parentID', '==', 'HGMEYCC5UcTH5X6kTri9mX9n7Kt1'))
+        .snapshotChanges();
+}
 
 }

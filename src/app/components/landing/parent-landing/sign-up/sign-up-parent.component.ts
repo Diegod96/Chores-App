@@ -35,7 +35,7 @@ export class SignUpParentComponent implements OnInit {
 
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.signUpParent(email, password);
+    this.authService.signUp(email, password);
 
     console.log(email, password);
     this.router.navigate(['chores']);

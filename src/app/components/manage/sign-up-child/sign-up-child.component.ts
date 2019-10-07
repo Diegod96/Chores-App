@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ParentService} from '../../../services/parent.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-up-child',
@@ -11,11 +12,12 @@ import {ParentService} from '../../../services/parent.service';
 export class SignUpChildComponent implements OnInit {
 
   constructor(private router: Router,
+              private authService: AuthService,
               private parentService: ParentService) {
   }
 
   signUp = new FormGroup({
-    username : new FormControl('',
+    email : new FormControl('',
         Validators.required),
     password : new FormControl('',
         Validators.required),
@@ -27,7 +29,7 @@ export class SignUpChildComponent implements OnInit {
 
 
   get username() {
-    return this.signUp.get('username');
+    return this.signUp.get('email');
   }
 
   get firstName() {
@@ -45,13 +47,12 @@ export class SignUpChildComponent implements OnInit {
 
   onSignUp(form) {
 
-    const username = form.value.username;
+    const email = form.value.email;
     const name = form.value.firstName + ' ' + form.value.lastName;
     const password = form.value.password;
-    const child= {name, username}
-
-    console.log(username, name, password);
-    this.parentService.signUpChild(child);
+    this.authService.signUpChild(email, password);
+    this.parentService.addChild(email, name);
+    
     this.router.navigate(['manage']);
   }
 

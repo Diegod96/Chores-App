@@ -10,15 +10,12 @@ export class AuthService {
   token;
   user;
   uid;
-
-
+  
   constructor(private router: Router) {
-
     this.user = 'parent';
   }
 
-
-  signUpParent(email: string, password: string){
+  signUp(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(
       response =>{
@@ -32,15 +29,25 @@ export class AuthService {
           });
         });
       }
-    
 
 
+  signUpChild(email: string, password: string){
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(
+      response =>{
+        firebase.auth().currentUser.getIdToken().then(
+          (token: string) => {
+              this.token = token;
+          }).catch(
+          error => {console.log(error);
+          });
+        });
+      }
 
-  loginParent(email: string, password: string) {
+  login(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
             response => {
-
                 // this.router.navigate(['/accounts']);
                 firebase.auth().currentUser.getIdToken().then(
                     (token: string) => {

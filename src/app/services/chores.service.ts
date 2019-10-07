@@ -89,7 +89,7 @@ export class ChoresService {
 
 
   getChores() {
-        return this.firestore.collection('chores')
+        return this.firestore.collection('chores', ref => ref.where('parentID', '==', 'HGMEYCC5UcTH5X6kTri9mX9n7Kt1'))
             .snapshotChanges();
   }
 
@@ -129,6 +129,9 @@ export class ChoresService {
     // this.chores[index].status = 'pending';
 
     // this.chores.splice(index, 1);
+
+
+
   }
 
   editChores(chore) {
