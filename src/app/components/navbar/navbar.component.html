@@ -2,19 +2,28 @@
     <li class="nav-item">
         <a class="nav-link active" routerLink="/">Home</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link active" routerLink="chores">Chores</a>
+    <li class="nav-item" *ngIf="user=='child'">
+        <a class="nav-link active" routerLink="child-chores">Chores</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link"  routerLink="rewards">Rewards</a>
+        <a class="nav-link" *ngIf="user=='child'"  routerLink="rewards">Rewards</a>
     </li>
 <!--    <li class="nav-item">-->
 <!--        <span class="badge badge-pill badge-success">{{points}}pts</span>-->
 <!--    </li>-->
 
+
+    <li *ngIf="user == 'parent'" class="nav-item">
+        <a class="nav-link" routerLink="home">Children</a>
+    </li>
+
     <li *ngIf="user == 'parent'" class="nav-item">
         <a class="nav-link" routerLink="manage">Manage</a>
     </li>
+
+    <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
 
 </ul>
 

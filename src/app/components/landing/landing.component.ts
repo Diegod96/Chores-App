@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -7,27 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  selected;
-  parent;
-  child;
+  constructor(private router: Router) { }
 
-  constructor() { }
 
   ngOnInit() {
-    this.selected = false;
-    this.parent = false;
-    this.child = false;
-  }
-
-  enter(x) {
-    if (x === 'child') {
-      this.child = true;
-    } else {
-      this.parent = true;
-    }
-
-    this.selected = true;
-
   }
 
 }

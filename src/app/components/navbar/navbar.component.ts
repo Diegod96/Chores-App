@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {PointsService} from '../../services/points.service';
 import {AuthService} from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +14,14 @@ export class NavbarComponent implements OnInit {
   user;
 
   constructor(private pointsService: PointsService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
     this.points = pointsService.points;
     this.user = authService.user;
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
   ngOnInit() {}

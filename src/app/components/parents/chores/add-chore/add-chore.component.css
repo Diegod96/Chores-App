@@ -1,0 +1,12 @@
+#date{
+    border: 2px black solid;
+    width: 30%;
+}
+
+.center {
+    display: block;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}

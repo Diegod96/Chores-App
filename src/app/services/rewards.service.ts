@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Reward} from '../models/rewards.model';
 import {AngularFirestore} from '@angular/fire/firestore';
+import { ChildService } from './child.service';
+import { AuthService } from './auth.service';
+import { ParentService } from './parent.service';
 
 
 @Injectable({
@@ -8,10 +11,15 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class RewardsService {
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore,
+              private childService: ChildService,
+              private parentService: ParentService) {
   }
 
-
+  getChildRewards() {
+    return this.firestore.collection('rewards', ref => ref.where('childID', '==', this.childService.childID))
+        .snapshotChanges();
+}
 
   rewards: Reward[] = [
     {
@@ -34,15 +42,15 @@ export class RewardsService {
   addReward(form) {
     this.firestore.collection('rewards')
       .add({
+        childID: this.childService.childID,
+        parentID: this.parentService.parentID,
         title: form.value.title,
         description: form.value.description,
-        points: form.value.points,
+        points: form.value.points
       })
-      // tslint:disable-next-line:only-arrow-functions
       .then(function() {
         console.log('Document successfully written!');
       })
-      // tslint:disable-next-line:only-arrow-functions
       .catch(function(error) {
         console.error('Error writing document: ', error);
       });

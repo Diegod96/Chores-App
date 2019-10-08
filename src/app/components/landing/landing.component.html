@@ -1,18 +1,17 @@
 <img src="https://cdn.evbuc.com/images/17218482/70057254841/2/logo.jpg" class="center">
+<h1 class="center">DinoChores</h1>
 
-
-<div class="container center" *ngIf="selected===false">
-    <div class="row">
-        <div class="col-sm cpButtons" (click)="enter('parent')">
-            Parent
-        </div>
-        <div class="col-sm cpButtons" (click)="enter('child')">
-            Child
+<div class="container center">
+        <div class="row">
+            <div class="col-sm cpButtons" routerLink="login">
+                Login
+            </div>
+            <div class="col-sm cpButtons" routerLink="parent-signup">
+                Parent Sign Up
+            </div>
+            <div class="col-sm cpButtons" routerLink="child-signup">
+                Child Sign Up
+            </div>
         </div>
     </div>
-</div>
-
-<app-parent-landing *ngIf="parent===true"></app-parent-landing>
-
-<app-child-landing *ngIf="child===true"></app-child-landing>
-
+    

@@ -24,16 +24,21 @@ export class ParentService {
      }
    ];
 
-  constructor(private authService: AuthService,
-              private firestore: AngularFirestore) { }
+parentID;
+
+  constructor(private firestore: AngularFirestore) { }
 
 
-   addChild(childEmail, childName){
-    this.firestore.collection('family')
+setParentID(ID){
+  this.parentID=ID;
+}
+
+addParent(email, ID){
+    this.firestore.collection('parent')
     .add({
-      parentID: this.authService.uid,
-      email: childEmail,
-      name: childName
+      email: email,
+      parentID: ID,
+      user: "parent"
     })
     .then(function() {
       console.log('Document successfully written!');
@@ -43,17 +48,15 @@ export class ParentService {
     });
    }
 
-
-
-
   // deleteChild(child) {
   //   this.children.pop(child);
   // }
 
 
   getChildren() {
-    return this.firestore.collection('family', ref => ref.where('parentID', '==', 'HGMEYCC5UcTH5X6kTri9mX9n7Kt1'))
+    return this.firestore.collection('children', ref => ref.where('parentID', '==', this.parentID))
         .snapshotChanges();
 }
+
 
 }

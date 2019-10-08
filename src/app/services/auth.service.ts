@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { ChildService } from './child.service';
+import { ParentService } from './parent.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,67 +10,92 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   token;
-  user;
+
+  ///ERRORS W/ USER- FIX THIS
+
+  user= 'child';
   uid;
-  
-  constructor(private router: Router) {
-    this.user = 'parent';
+
+  constructor(private router: Router,
+              private childService: ChildService,
+              private parentService: ParentService) {
   }
 
-  signUp(email: string, password: string){
+  signUpParent(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(
-      response =>{
+      response => {
         firebase.auth().currentUser.getIdToken().then(
           (token: string) => {
               this.token = token;
                 this.uid = firebase.auth().currentUser.uid;
+                this.user='parent';
                 console.log(this.uid)
-          }).catch(
+          }).then( 
+            response =>{
+              this.parentService.addParent(email, this.uid);
+              this.router.navigate(['home']);
+            })
+          .catch(
           error => {console.log(error);
           });
         });
       }
 
+      signUpChild(email: string, password: string, parentID:string, name: string){
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(
+          response => {
+            firebase.auth().currentUser.getIdToken().then(
+              (token: string) => {
+                  this.token = token;
+                    this.uid = firebase.auth().currentUser.uid;
+                    this.user='child';
+                    console.log(this.uid)
+              }).then( 
+                response =>{
+                  this.childService.addChild(parentID, name, this.uid);
+                  this.router.navigate(['child-chores']);
+                })
+              .catch(
+              error => {console.log(error);
+              })
+            });
+          }
 
-  signUpChild(email: string, password: string){
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(
-      response =>{
-        firebase.auth().currentUser.getIdToken().then(
-          (token: string) => {
-              this.token = token;
-          }).catch(
-          error => {console.log(error);
-          });
-        });
-      }
-
-  login(email: string, password: string) {
+  login(email: string, password: string, user: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
             response => {
-                // this.router.navigate(['/accounts']);
                 firebase.auth().currentUser.getIdToken().then(
                     (token: string) => {
                         this.token = token;
                         this.uid = firebase.auth().currentUser.uid;
-                        console.log(this.uid)
-                    }).catch(
+                        this.user= user;
+                        if(user=='parent'){
+                          this.parentService.setParentID(firebase.auth().currentUser.uid);}
+                        else {
+                          this.childService.setChildID(firebase.auth().currentUser.uid)
+                        }
+                    })
+                    .then(response => {
+                      if(this.user=='child'){
+                        this.router.navigate(['child-chores']);}
+                      else{
+                        this.router.navigate(['home']);}
+                      }).catch(
                     error => {console.log(error);
                     });
             });
 }
-
 
 logout() {
     firebase.auth().signOut().then(() => console.log('logged you out')).catch(
         error => console.log(error)
     );
     this.token = null;
-    // this.router.navigate(['']);
+    this.router.navigate(['']);
 }
-
 
 
 }

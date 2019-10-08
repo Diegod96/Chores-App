@@ -1,0 +1,10 @@
+<h1 class="center">DinoChores</h1>
+
+<div class="container center">
+        <div *ngFor='let child of children' class="row">
+            <div class="col-sm cpButtons" (click)="select(child.payload.doc.data().childID, 
+                                                   child.payload.doc.data().name, child.payload.doc.data().points)">
+                {{child.payload.doc.data().name}}
+            </div>
+        </div>
+</div>

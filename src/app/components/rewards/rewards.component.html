@@ -1,4 +1,4 @@
-<div id="container">
+<!-- <div id="container">
 
     <h1>Rewards<span style="float: right" class="badge badge-pill badge-success">
                 {{points}} pts
@@ -18,7 +18,7 @@
             <span data-toggle="collapse" href="#collapse">Read More...</span>
 
 
-<!--            //COLLAPSE BUG NEEDS FIXING-->
+           //COLLAPSE BUG NEEDS FIXING
 
             <span class="badge badge-pill badge-success">
                 {{reward.points}}
@@ -39,3 +39,39 @@
 
 </div>
 
+
+
+-->
+     
+ <div id="container">
+
+        <h1>{{childName}}'s Rewards<span style="float: right" class="badge badge-pill badge-success">
+                {{points}}pts
+                </span></h1>
+        <ul>
+            <li *ngFor="let reward of rewards">
+                <button (click)="edit(reward.title)">Edit</button>
+                    {{reward.payload.doc.data().title}}
+                <span data-toggle="collapse" href="#collapse">Read More...</span>
+    
+    
+    <!--            //COLLAPSE BUG NEEDS FIXING-->
+    
+                <span class="badge badge-pill badge-success">
+                        {{reward.payload.doc.data().points}}
+                </span>    
+                <div class="collapse" id="collapse">
+                    <div class="card card-body">
+                            {{reward.payload.doc.data().description}}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h1 routerLink="/add-reward">ADD REWARD</h1>
+            </li>
+    
+        </ul>
+    
+    </div>
+    
+    
