@@ -12,6 +12,7 @@ import { ParentSignupComponent } from './components/landing/parent-signup/parent
 import { ChildChoresComponent } from './components/child/child-chores/child-chores.component';
 import { HomeComponent } from './components/parents/home/home.component';
 import { ManageThisChildComponent } from './components/parents/manage-this-child/manage-this-child.component';
+import { ChildRewardsComponent } from './components/child/child-rewards/child-rewards.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: LandingComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
 
 
   {path: 'rewards', pathMatch: 'full', component: RewardsComponent},
+  {path: 'child-rewards', pathMatch: 'full', component: ChildRewardsComponent},
   {path: 'add-chore', pathMatch: 'full', component: AddChoreComponent},
   {path: 'add-reward', pathMatch: 'full', component: AddRewardComponent},
   {path: 'manage', pathMatch: 'full', component: ManageComponent}

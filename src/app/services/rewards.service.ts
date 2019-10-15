@@ -58,11 +58,17 @@ export class RewardsService {
   }
 
   redeem(reward) {
+
+    //HARD CODED- UPDATE FOR DATABASE
+
     const index = this.rewards.indexOf(reward);
     this.rewards.splice(index, 1);
   }
 
   edit(reward) {
+
+    //HARD CODED TO DATA-BASE UPDATE
+
     const index = this.rewards.indexOf(reward);
     this.firestore.collection('rewards').doc('JCquZ1v2AhC16Z0LhFsk').update({
       title: 'Pizza'

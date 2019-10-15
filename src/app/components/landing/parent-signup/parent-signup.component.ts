@@ -38,7 +38,7 @@ onSignUp(form) {
   const password = form.value.password;
   this.authService.signUpParent(email, password);
   console.log(email, password);
-  this.router.navigate(['chores']);
+  this.router.navigate(['home']);
 }
 
 ngOnInit() {

@@ -1,1 +1,29 @@
-<p>child-rewards works!</p>
+<div id="container">
+
+        <h1>My Rewards<span style="float: right" class="badge badge-pill badge-success">
+                {{childPoints}}pts
+                </span></h1>
+        <ul>
+            <li *ngFor="let reward of rewards">
+                <button [disabled]="childPoints<reward.payload.doc.data().points" (click)="redeem(reward)">Redeem!</button>
+                    {{reward.payload.doc.data().title}}
+                <span data-toggle="collapse" href="#collapse">Read More...</span>
+    
+    
+    <!--            //COLLAPSE BUG NEEDS FIXING-->
+    
+                <span class="badge badge-pill badge-success">
+                        {{reward.payload.doc.data().points}}
+                </span>    
+                <div class="collapse" id="collapse">
+                    <div class="card card-body">
+                            {{reward.payload.doc.data().description}}
+                    </div>
+                </div>
+            </li>
+    
+        </ul>
+    
+    </div>
+    
+    
