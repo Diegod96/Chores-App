@@ -1,31 +1,37 @@
-import { Injectable, EventEmitter, } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
+import { firestore } from 'firebase';
+import * as firebase from 'firebase';
+import { AuthService } from './auth.service';
+import { ChildService } from './child.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
+
 export class PointsService {
 
-  points;
+  constructor(private firestore: AngularFirestore,
+              private childService: ChildService) { }
 
-  constructor(private firestore: AngularFirestore) {
-    this.points = 10;
-  }
+    points;
 
-  // getPoints(){
-  //   return this.firestore.collection('children', ref => ref.where('childID', '==', this.childID))
-  //         .snapshotChanges();
-  // }
 
-  addPoints(amount) {
-    this.points += amount;
-  }
+    addtoPointsDB(ID){
+      this.firestore.collection('points').doc(ID)
+        .set({
+          points: 0
+        })
+        .then(function() {
+          console.log('Points Document successfully written!');
+        })
+        .catch(function(error) {
+          console.error('Error writing document: ', error);
+        });
+       }
 
-  minusPoints(amount) {
+      getPoints(){
+        return this.firestore.collection('points').doc(this.childService.childID).valueChanges();
+       }
 
-    if (this.points >= amount) {
-    this.points = this.points - amount;
-    console.log(this.points)}
+    }
 
-  }
-}
+

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { ChildService } from './child.service';
 import { ParentService } from './parent.service';
+import { PointsService } from './points.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
 
   constructor(private router: Router,
               private childService: ChildService,
-              private parentService: ParentService) {
+              private parentService: ParentService,
+              private pointsService: PointsService) {
   }
 
   signUpParent(email: string, password: string){
@@ -55,6 +57,7 @@ export class AuthService {
               }).then( 
                 response =>{
                   this.childService.addChild(parentID, name, this.uid);
+                  this.pointsService.addtoPointsDB(this.uid); 
                   this.router.navigate(['child-chores']);
                 })
               .catch(
@@ -80,7 +83,8 @@ export class AuthService {
                     })
                     .then(response => {
                       if(this.user=='child'){
-                        this.router.navigate(['child-chores']);}
+                        this.router.navigate(['child-chores']);
+                      }
                       else{
                         this.router.navigate(['home']);}
                       }).catch(
@@ -94,7 +98,12 @@ logout() {
         error => console.log(error)
     );
     this.token = null;
+    this.childService.setChildNameIDPoints(null,null, null, null);
     this.router.navigate(['']);
+}
+
+isAuthenticated() {
+  return this.token != null;
 }
 
 

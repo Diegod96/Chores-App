@@ -11,32 +11,38 @@ import { ChildService } from 'src/app/services/child.service';
   styleUrls: ['./child-rewards.component.css']
 })
 export class ChildRewardsComponent implements OnInit {
-
+ 
   rewards;
-  childPoints;
+  child;
+  points;
+  pointsLoaded: Promise<boolean>
 
   constructor(private rewardService: RewardsService,
-              private childService: ChildService,
-              private pointsService: PointsService,
-              private authService: AuthService,
-              private parentService: ParentService) {
-    this.childPoints= childService.childPoints;
-    
+              private pointsService: PointsService) {
   }
 
 getRewards = () =>
         this.rewardService.getChildRewards().subscribe(res => (
             this.rewards = res
         ))
+    
+getPoints = () => this.pointsService.getPoints().subscribe(
+  (points) => {
+      this.points = points;
+      this.pointsLoaded = Promise.resolve(true);
+  }
+);
 
 
 
-    ngOnInit() {
+ngOnInit() {
         this.getRewards();
+        this.getPoints();
     }
 
   redeem(reward) {
-
+    this.rewardService.redeem(reward);
+    
   }
 
 }

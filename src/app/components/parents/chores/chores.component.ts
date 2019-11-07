@@ -66,6 +66,7 @@ export class ChoresComponent implements OnInit {
   child;
   rewards;
   points;
+  now= Date.now()
 
 
   constructor(private choreService: ChoresService,
@@ -100,15 +101,22 @@ getChores = () =>
   complete(chore, points) {
       if (this.user === 'parent') {
         this.choreService.choreCompleted(chore);
-        this.pointsService.addPoints(points);
-        console.log(this.pointsService.points);
       } else {
         console.log('Error: User is a child');
-      }
+      } 
   }
 
-  pending(chore) {
-    this.choreService.chorePending(chore);
+  deductPoints(chore, points) {
+
+      this.choreService.choreIncomplete(chore);
+
+}
+
+
+  //ADD EDIT FUNCTIONALITY
+  edit(chore) {
+  
+
   }
 
 

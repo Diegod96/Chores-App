@@ -33,20 +33,35 @@ setParentID(ID){
   this.parentID=ID;
 }
 
+// addParent(email, ID){
+//     this.firestore.collection('parent')
+//     .add({
+//       email: email,
+//       parentID: ID,
+//       user: "parent"
+//     })
+//     .then(function() {
+//       console.log('Document successfully written!');
+//     })
+//     .catch(function(error) {
+//       console.error('Error writing document: ', error);
+//     });
+//    }
+
 addParent(email, ID){
-    this.firestore.collection('parent')
-    .add({
-      email: email,
-      parentID: ID,
-      user: "parent"
-    })
-    .then(function() {
-      console.log('Document successfully written!');
-    })
-    .catch(function(error) {
-      console.error('Error writing document: ', error);
-    });
-   }
+  this.firestore.collection('parent').doc(ID)
+  .set({
+    email: email,
+    parentID: ID,
+    user: "parent"
+  })
+  .then(function() {
+    console.log('Document successfully written!');
+  })
+  .catch(function(error) {
+    console.error('Error writing document: ', error);
+  });
+ }
 
   // deleteChild(child) {
   //   this.children.pop(child);

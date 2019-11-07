@@ -8,9 +8,11 @@
     <li class="nav-item">
         <a class="nav-link" *ngIf="user=='child'"  routerLink="child-rewards">Rewards</a>
     </li>
-<!--    <li class="nav-item">-->
-<!--        <span class="badge badge-pill badge-success">{{points}}pts</span>-->
-<!--    </li>-->
+   <li class="nav-item" *ngIf="user=='child'">
+        <span *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
+            {{points.points}} pts
+        </span>
+    </li> 
 
 
     <li *ngIf="user == 'parent'" class="nav-item">

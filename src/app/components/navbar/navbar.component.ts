@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {PointsService} from '../../services/points.service';
 import {AuthService} from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -12,18 +12,27 @@ export class NavbarComponent implements OnInit {
 
   points;
   user;
+  pointsLoaded: Promise<boolean>
 
   constructor(private pointsService: PointsService,
               private authService: AuthService,
               private router: Router) {
-    this.points = pointsService.points;
     this.user = authService.user;
   }
+
+  getPoints = () => this.pointsService.getPoints().subscribe(
+    (points) => {
+        this.points = points;
+        this.pointsLoaded = Promise.resolve(true);
+    }
+  );
 
   logout(){
     this.authService.logout();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getPoints();
+  }
 
 }

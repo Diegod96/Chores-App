@@ -4,8 +4,15 @@
         <h1>Chores</h1>
         <ul>
             <li *ngFor="let chore of chores">
-                <button *ngIf=" chore.payload.doc.data().status=='pending'" (click)="complete(chore, chore.payload.doc.data().points)" disabled>Pending Approval</button>
-                <button *ngIf="chore.payload.doc.data().status=='scheduled'" (click)="pending(chore)">Complete?</button>
+                <button type="button" class="btn btn-danger" *ngIf="now > chore.payload.doc.data().due.seconds*1000" disabled>Incomplete
+                </button>
+
+                <button *ngIf="chore.payload.doc.data().status=='scheduled' && chore.payload.doc.data().due.seconds*1000 >= now
+                " (click)="pending(chore)">Complete?</button>
+
+                <button *ngIf="chore.payload.doc.data().status=='pending' && chore.payload.doc.data().due.seconds*1000 >= now
+                " (click)="complete(chore, chore.payload.doc.data().points)" disabled>Pending Approval</button>
+
                 <span data-toggle="collapse" href="#collapse">{{chore.payload.doc.data().title}}</span>
                 <span class="right">Due: {{chore.payload.doc.data().due.seconds*1000 |  date:'EEEE MMM d, y, h:mm:ss a'}}
                     <span class="badge badge-pill badge-success">{{chore.payload.doc.data().points}}pts</span>

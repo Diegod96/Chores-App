@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit {
     // this.children= parentService.children;
   }
 
-select(ID, name, points){
+select(docID, ID, name, points){
   const promise1 = Promise.resolve(
-    this.childService.setChildNameIDPoints(ID, name, points)
+    this.childService.setChildNameIDPoints(docID, ID, name, points)
     );
   
   promise1.then(res =>{

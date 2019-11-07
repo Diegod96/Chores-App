@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import { ChildService } from './child.service';
 import { AuthService } from './auth.service';
 import { ParentService } from './parent.service';
+import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -13,7 +14,9 @@ export class RewardsService {
 
   constructor(private firestore: AngularFirestore,
               private childService: ChildService,
-              private parentService: ParentService) {
+              private parentService: ParentService,
+              private authService: AuthService,
+              ) {
   }
 
   getChildRewards() {
@@ -21,23 +24,6 @@ export class RewardsService {
         .snapshotChanges();
 }
 
-  rewards: Reward[] = [
-    {
-      title: 'Ice Cream',
-      description: 'One ice cream date to Dairy Queen w/ the parent of your choosing',
-      points: 10
-    },
-    {
-      title: 'New Game for Xbox',
-      description: 'One new game!',
-      points: 50
-    },
-    {
-      title: 'Trip to Six Flags ',
-      description: 'Six Flags Day for the whole family!! Not redeemable until your brother also recieves 250pts.',
-      points: 250
-    }
-  ];
 
   addReward(form) {
     this.firestore.collection('rewards')
@@ -58,20 +44,29 @@ export class RewardsService {
   }
 
   redeem(reward) {
+    const points  = Number(reward.payload.doc.data().points);
+    const decrement = firebase.firestore.FieldValue.increment(0-points);
 
-    //HARD CODED- UPDATE FOR DATABASE
+    this.firestore.collection('rewards').doc(reward.payload.doc.id).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
 
-    const index = this.rewards.indexOf(reward);
-    this.rewards.splice(index, 1);
+    this.firestore.collection('points').doc(this.authService.uid).update({
+      points: decrement
+    }).then( res => {console.log('Status updated'); })
+      .catch(function(error) {
+          console.error('Error updating chore', error);
+    });
   }
 
   edit(reward) {
 
     //HARD CODED TO DATA-BASE UPDATE
 
-    const index = this.rewards.indexOf(reward);
-    this.firestore.collection('rewards').doc('JCquZ1v2AhC16Z0LhFsk').update({
-      title: 'Pizza'
+    this.firestore.collection('rewards').doc(reward.payload.doc.id).update({
+      //title: 'Pizza'
     }).then( res => {console.log('Reward updated'); })
         .catch(function(error) {
           console.error('Error updating reward', error);

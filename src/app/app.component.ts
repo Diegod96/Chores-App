@@ -9,5 +9,10 @@ import { auth } from 'firebase';
 })
 export class AppComponent {
   title = 'chores';
+  loggedIn=undefined;
+
+  constructor(private authService: AuthService){
+    this.loggedIn=authService.uid;
+  }
 
 }

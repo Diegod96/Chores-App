@@ -45,11 +45,20 @@
 
     <ul>
         <li *ngFor="let chore of chores">
-            <button *ngIf=" chore.payload.doc.data().status=='pending'" (click)="complete(chore, chore.payload.doc.data().points)" [disabled]="user=='child'">Pending Approval</button>
-            <button *ngIf="chore.payload.doc.data().status=='scheduled'" (click)="pending(chore)">Complete?</button>
+
+            <!-- LATE -->
+            <button type="button" class="btn btn-danger" *ngIf="now > chore.payload.doc.data().due.seconds*1000 && chore.payload.doc.data().status!=='pending'" (click)="edit(chore)">Extension</button>
+            <button type="button" class="btn btn-danger" *ngIf="now > chore.payload.doc.data().due.seconds*1000 && chore.payload.doc.data().status!=='pending'" (click)="deductPoints(chore, chore.payload.doc.data().points)">Deduct Points</button>
+            
+            <!-- PENDING APPROVAL -->
+            <button *ngIf="chore.payload.doc.data().status=='pending' && chore.payload.doc.data().due.seconds*1000 >= now" 
+                (click)="complete(chore, chore.payload.doc.data().points)">Pending Approval</button>
+
+            <!-- EDIT -->
+            <button *ngIf="chore.payload.doc.data().status=='scheduled' && chore.payload.doc.data().due.seconds*1000 >= now" (click)="edit(chore)">Edit</button>
 
             <span data-toggle="collapse" href="#collapse">{{chore.payload.doc.data().title}}</span>
-            <span class="right">Due: {{chore.payload.doc.data().due.seconds*1000 |  date:'EEEE MMM d, y, h:mm:ss a'}}
+            <span class="right">Due: {{chore.payload.doc.data().due.seconds*1000 |  date:'EEEE MMM d, h:mm:ss a'}}
                 <span class="badge badge-pill badge-success">{{chore.payload.doc.data().points}}pts</span>
             </span>
             <div class="collapse" id="collapse">

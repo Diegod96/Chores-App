@@ -11,11 +11,13 @@ import { ParentService } from './parent.service';
 export class ChoresService {
 
   childId;
+  childDocID;
 
   constructor(private firestore: AngularFirestore,
               private authService: AuthService,
               private childService: ChildService,
               private parentService: ParentService) {
+                this.childDocID=childService.docID
   }
 
   getChildChores() {
@@ -46,30 +48,46 @@ export class ChoresService {
 
   choreCompleted(chore) {
 
-      const points = chore.payload.doc.data().points;
+      const points  = Number(chore.payload.doc.data().points);
+      const increment = firebase.firestore.FieldValue.increment(points);
 
-      // FINISH THIS FUNCTION: Database should be updated to increase points under
-      // children/doc/specific child points + amount earned from chores
-      //  Chore should then be either deleted or changed to completed
+      this.firestore.collection('chores').doc(chore.payload.doc.id).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
 
-      this.firestore.collection('chore').doc(chore.payload.doc.id).update({
-          status: 'completed'}).
-          then( res => {console.log('Status updated'); })
+      this.firestore.collection('points').doc(this.childService.childID).update({
+          points: increment
+      }).then( res => {console.log('Status updated'); })
           .catch(function(error) {
               console.error('Error updating chore', error);
           });
-
-      this.firestore.collection('children').doc(chore.payload.do.id).update({
-          points: form.value.points + points
-      });
-      then( res => {console.log('Status updated'); })
-          .catch(function(error) {
-              console.error('Error updating chore', error);
-          });
-
-
 
   }
+
+  choreIncomplete(chore) {
+
+    const points  = Number(chore.payload.doc.data().points);
+    const decrement = firebase.firestore.FieldValue.increment(0-points);
+
+    this.firestore.collection('chores').doc(chore.payload.doc.id).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+
+    this.firestore.collection('points').doc(this.childService.childID).update({
+        points: decrement
+    }).then( res => {console.log('Status updated'); })
+        .catch(function(error) {
+            console.error('Error updating chore', error);
+        });
+
+}
+
+
+
 
   chorePending(chore) {
 

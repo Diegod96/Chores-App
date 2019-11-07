@@ -1,15 +1,21 @@
+<button (click)="test()">CLICK</button>
+
+
+
 <div id="container">
 
-        <h1>My Rewards<span style="float: right" class="badge badge-pill badge-success">
-                {{childPoints}}pts
-                </span></h1>
+        <h1>My Rewards
+            <span *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
+               {{points.points}} pts
+            </span>
+        </h1>
         <ul>
             <li *ngFor="let reward of rewards">
-                <button [disabled]="childPoints<reward.payload.doc.data().points" (click)="redeem(reward)">Redeem!</button>
+                <button [disabled]="reward.payload.doc.data().points>10" (click)="redeem(reward)">Redeem!</button>
                     {{reward.payload.doc.data().title}}
                 <span data-toggle="collapse" href="#collapse">Read More...</span>
     
-    
+     
     <!--            //COLLAPSE BUG NEEDS FIXING-->
     
                 <span class="badge badge-pill badge-success">

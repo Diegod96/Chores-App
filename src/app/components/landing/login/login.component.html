@@ -1,17 +1,19 @@
-<div class="form">
+<div class="form centerForm">
     <h1>Login</h1>
     <form [formGroup]="login" (ngSubmit)="onLogin(login)">
-
-        <div class="radio">
-            <label>
-                <input type="radio" name="user" formControlName="user" value='parent'>Parent
-            </label>
+        <div class="row">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="user" formControlName="user" value='parent'>Parent
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="user" formControlName="user" value='child'>Child
+                </label>
+            </div>
         </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="user" formControlName="user" value='child'>Child
-            </label>
-        </div>
+ 
 
         <div class="form-group">
             <label>Email: </label>

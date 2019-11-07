@@ -12,6 +12,7 @@ import {ParentService} from '../../../services/parent.service';
 export class ChildChoresComponent implements OnInit {
 
   chores;
+  now= Date.now();
 
   constructor(private choreService: ChoresService,
               private pointsService: PointsService,
