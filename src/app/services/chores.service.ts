@@ -12,12 +12,35 @@ export class ChoresService {
 
   childId;
   childDocID;
+  edit=false;
+
+  title;
+  description;
+  points;
+  due;
+  currentChoreID;
 
   constructor(private firestore: AngularFirestore,
               private authService: AuthService,
               private childService: ChildService,
               private parentService: ParentService) {
-                this.childDocID=childService.docID
+              this.childDocID=childService.docID
+  }
+
+  setEdit(x){
+    this.edit=x;
+  }
+
+  setCurrentChoreToEdit(chore){
+    this.edit=true;
+    this.title= chore.payload.doc.data().title;
+    this.description= chore.payload.doc.data().description;
+    this.points= chore.payload.doc.data().points;
+    this.due= chore.payload.doc.data().due.toDate();
+    this.currentChoreID= chore.payload.doc.id;
+
+    console.log(this.edit, this.title, this.description, this.points,
+      this.due, this.currentChoreID)
   }
 
   getChildChores() {
@@ -47,15 +70,15 @@ export class ChoresService {
 
 
   choreCompleted(chore) {
-
       const points  = Number(chore.payload.doc.data().points);
       const increment = firebase.firestore.FieldValue.increment(points);
 
-      this.firestore.collection('chores').doc(chore.payload.doc.id).delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
+      this.firestore.collection('chores').doc(chore.payload.doc.id).delete()
+      .then(function() {
+        console.log("Document successfully deleted!");})
+      .catch(function(error) {
         console.error("Error removing document: ", error);
-    });
+      });
 
       this.firestore.collection('points').doc(this.childService.childID).update({
           points: increment
@@ -83,14 +106,12 @@ export class ChoresService {
         .catch(function(error) {
             console.error('Error updating chore', error);
         });
-
 }
 
 
 
 
   chorePending(chore) {
-
     this.firestore.collection('chores').doc(chore.payload.doc.id).update({
       status: 'pending'}).
       then( res => {console.log('Status updated'); })
@@ -101,10 +122,11 @@ export class ChoresService {
 
   editChores(chore) {
 
-    //UPDATE FROM HARD CODE
-
-      this.firestore.collection('chores').doc('y6K1VLmpBAlRvEjs3LHz').update({
-          title: 'Does this work?'
+      this.firestore.collection('chores').doc(this.currentChoreID).update({
+          title: chore.value.title,
+          description:chore.value.description,
+          points:chore.value.points,
+          due: chore.value.due
       }).then( res => {console.log('Chore updated'); })
           .catch(function(error) {
               console.error('Error updating chore', error);

@@ -1,44 +1,3 @@
-<!-- <div id="container">
-
-    <h1>Chores</h1>
-
-    <select *ngIf="user=='parent'" class="custom-select custom-select-lg mb-3">
-        <option selected>Select Child:</option>
-        <option *ngFor="let child of children" value="1">{{child.name}}</option>
-    </select>
-
-    <ul>
-        <li *ngFor="let chore of chores">
-            <button *ngIf="chore.status=='pending'" (click)="complete(chore, chore.points)" [disabled]="user=='child'">Pending Approval</button>
-            <button *ngIf="chore.status=='scheduled'" (click)="pending(chore)">Complete?</button>
-
-
-            <span data-toggle="collapse" href="#collapse">{{chore.title}}</span>
-            <span class="right">Due: {{chore.due |  date:'EEEE MMM d, y, h:mm:ss a'}}
-                <span class="badge badge-pill badge-success">{{chore.points}}pts</span>
-            </span>
-            <div class="collapse" id="collapse">
-                <div class="card card-body">
-                    {{chore.description}}
-                </div>
-            </div>
-        </li>
-
-        <li *ngIf="user=='parent'" id="add">
-            <h1 routerLink="/add-chore">ADD</h1>
-        </li>
-
-
-
-
-
-    </ul>
-
-
-</div>
- -->
-
-
 <div id="container">
 
     <h1>{{child}}'s Chores</h1>
@@ -71,44 +30,4 @@
             <h1 routerLink="/add-chore">ADD</h1>
         </li>
     </ul>
-
-
 </div>
-
-
-<!-- --------------------------------------------------------------------------------- -->
-<!--     
-        <div id="container">
-
-                <h1>{{child}}'s Rewards<span style="float: right" class="badge badge-pill badge-success">
-                        {{points}}pts
-                        </span></h1>
-                <ul>
-                    <li *ngFor="let reward of rewards">
-                        <button (click)="edit(reward.title)">Edit</button>
-                            {{reward.payload.doc.data().title}}
-                        <span data-toggle="collapse" href="#collapse">Read More...</span>
-            
-            
-                      //COLLAPSE BUG NEEDS FIXING-->
-            
-                        <!-- <span class="badge badge-pill badge-success">
-                                {{reward.payload.doc.data().points}}
-                        </span>
-            
-            
-                        <div class="collapse" id="collapse">
-                            <div class="card card-body">
-                                    {{reward.payload.doc.data().description}}
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <h1 routerLink="/add-reward">ADD REWARD</h1>
-                    </li>
-            
-                </ul>
-            
-            </div>
-            
-             --> 

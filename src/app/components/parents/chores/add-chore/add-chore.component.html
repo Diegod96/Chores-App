@@ -1,8 +1,9 @@
 <div class="container"> 
 
 <div class="form centerForm">
-    <h1>Add a New Chore for {{child}}</h1>
-    <form [formGroup]="add" (ngSubmit)="onAdd(add)">
+    <h1 *ngIf="!edit" >Add a New Chore for {{child}}</h1>
+    <h1 *ngIf="edit" >Edit Chore for {{child}}</h1>
+    <form [formGroup]="choreForm" (ngSubmit)="onAdd(choreForm)">
         <div class="form-group">
             <label>Title: </label>
             <input placeholder="Title"
