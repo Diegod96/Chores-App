@@ -1,9 +1,10 @@
+
 <div class="form centerForm">
         <h1>Parent Sign Up</h1>
         <form [formGroup]="signUp" (ngSubmit)="onSignUp(signUp)">
             <div class="form-group">
                 <label>Email: </label>
-                <input placeholder="email"
+                <input placeholder="john.doe@example.com"
                        formControlName="email"
                        required>
                 <br>
@@ -11,10 +12,19 @@
             <div class="form-group">
                 <label>Password: </label>
                 <input type="password"
-                       placeholder="password"
+                       placeholder="Minimum of 6 characters"
                        formControlName="password"
+                       minlength="6"
+                       id="password"
                        required>
                 <br>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password: </label>
+                <input type="password"
+                        placeholder="Retype Password"
+                        formControlName="password"
+                        required validateEqual="password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
