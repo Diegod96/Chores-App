@@ -7,24 +7,25 @@
                 <input placeholder="john.doe@example.com"
                        formControlName="email"
                        required>
+                </div>
                 <br>
-            </div>
             <div class="form-group">
                 <label>Password: </label>
                 <input type="password"
-                       placeholder="Minimum of 6 characters"
-                       formControlName="password"
-                       minlength="6"
+                       placeholder="Enter password"
                        id="password"
-                       required>
+                       class="form-control"
+                       formControlName="password"
+                       [formGroup]="form">
                 <br>
             </div>
             <div class="form-group">
                 <label>Confirm Password: </label>
                 <input type="password"
                         placeholder="Retype Password"
-                        formControlName="password"
-                        required validateEqual="password">
+                        id="confirmPassword"
+                        formControlName="confirmPassword"
+                        [formGroup]="form">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
