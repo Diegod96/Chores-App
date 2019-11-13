@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParentService } from 'src/app/services/parent.service';
 import {AbstractControl} from '@angular/forms';
-import { PasswordValidation } from './password-validation';
+// import { PasswordValidation } from './password-validation';
 
 @Component({
   selector: 'app-parent-signup',
@@ -23,8 +23,6 @@ signUp = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
     password : new FormControl('', [Validators.required]),
     confirmation : new FormControl('', [Validators.required])
-}, {
-    validators: PasswordValidation.MatchPassword
 });
 
 
@@ -54,18 +52,18 @@ onSignUp(form) {
   this.router.navigate(['home']);
 }
 
-// MatchPassword(AC: AbstractControl) {
-//   const password = AC.get('password').value; // Get value in password field
-//   const confirmPassword = AC.get('confirmPassword').value; // Get value in confirm password field
-//   // tslint:disable-next-line: triple-equals
-//   if (password != confirmPassword) {
-//       console.log('Passwords do not match!!!');
-//       AC.get('confirmPassword').setErrors( {MatchPassword: true} );
-//     } else {
-//       console.log('Passwords match');
-//       return null;
-//     }
-// }
+MatchPassword(AC: AbstractControl) {
+  const password = AC.get('password').value; // Get value in password field
+  const confirmPassword = AC.get('confirmPassword').value; // Get value in confirm password field
+  // tslint:disable-next-line: triple-equals
+  if (password != confirmPassword) {
+      console.log('Passwords do not match!!!');
+      AC.get('confirmPassword').setErrors( {MatchPassword: true} );
+    } else {
+      console.log('Passwords match');
+      return null;
+    }
+}
 
 
 ngOnInit(): void {
