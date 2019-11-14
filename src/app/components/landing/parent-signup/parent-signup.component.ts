@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParentService } from 'src/app/services/parent.service';
 import {AbstractControl} from '@angular/forms';
-// import { PasswordValidation } from './password-validation';
+
 
 @Component({
   selector: 'app-parent-signup',
@@ -52,24 +52,28 @@ onSignUp(form) {
   this.router.navigate(['home']);
 }
 
-MatchPassword(AC: AbstractControl) {
-  const password = AC.get('password').value; // Get value in password field
-  const confirmPassword = AC.get('confirmPassword').value; // Get value in confirm password field
-  // tslint:disable-next-line: triple-equals
-  if (password != confirmPassword) {
-      console.log('Passwords do not match!!!');
-      AC.get('confirmPassword').setErrors( {MatchPassword: true} );
-    } else {
-      console.log('Passwords match');
-      return null;
-    }
-}
+// checkPasswords(group: FormGroup) {
+//   const pass = group.get('password').value;
+//   const confirmPass = group.get('confirmPass').value;
+
+//   return pass === confirmPass ? null : { notSame: true}
+// }
+
+// // MatchPassword(AC: AbstractControl) {
+// //   const password = AC.get('password').value; // Get value in password field
+// //   const confirmPassword = AC.get('confirmPassword').value; // Get value in confirm password field
+// //   // tslint:disable-next-line: triple-equals
+// //   if (password != confirmPassword) {
+// //       console.log('Passwords do not match!!!');
+// //       AC.get('confirmPassword').setErrors( {MatchPassword: true} );
+// //     } else {
+// //       console.log('Passwords match');
+// //       return null;
+// //     }
+// // }
 
 
 ngOnInit(): void {
 }
 
 }
-
-
-

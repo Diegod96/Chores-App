@@ -7,31 +7,34 @@
                 <input placeholder="john.doe@example.com"
                        formControlName="email"
                        required>
+                </div>
                 <br>
-            </div>
             <div class="form-group">
                 <label>Password: </label>
-                <input type="password"
-                       placeholder="Minimum of 6 characters"
-                       formControlName="password"
-                       minlength="6"
-                       id="password"
-                       required>
+                <input type="password" 
+                formControlName="password"
+                name="password"
+                placeholder="Password"
+                required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+                <div *ngIf="password.invalid && (signUp.submitted || password.touched)" class="alert alert-danger">
+                        <div *ngIf="password.errors.required"> Password is required. </div>
+                        <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+                        </div>
+                </div>
                 <br>
             </div>
             <div class="form-group">
                 <label>Confirm Password: </label>
                 <input type="password"
-                        placeholder="Retype Password"
-                        formControlName="confirmation"
-                        required validateEqual="password">
-            </div>
-            <div *ngIf="confirmation.invalid && (confirmation.dirty || confirmation.touched)"
-                class="alert alert-danger">
-
-            <div *ngIf="confirmation.errors.required">
-                Name is required.
-            </div>
+                       formControlName="confirmation"
+                       name="confirmPassword"
+                       placeholder="Confirm Password"
+                       pattern="{{ password.value }}"/>
+                <div *ngIf="confirmation.invalid && (signUp.submitted || confirmation.touched)" class="alert alert-danger">
+                <div *ngIf="confirmation.errors.required"> Confirm password is required. </div>
+                <div *ngIf="confirmation.errors.pattern"> Password & Confirm Password does not match.</div>
+            </div> 
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
