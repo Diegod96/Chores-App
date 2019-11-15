@@ -39,7 +39,9 @@ export class AuthService {
               this.router.navigate(['home']);
             })
           .catch(
-          error => {console.log(error);
+          error => {
+            console.log(error);
+            alert(error)
           });
         });
       }
