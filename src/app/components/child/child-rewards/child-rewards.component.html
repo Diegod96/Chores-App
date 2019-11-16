@@ -4,12 +4,12 @@
             <span *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
                {{points.points}} pts
             </span>
-        </h1>
+        </h1> 
         <ul>
-            <li *ngFor="let reward of rewards">
-                <button [disabled]="reward.payload.doc.data().points>10" (click)="redeem(reward)">Redeem!</button>
+            <li *ngFor="let reward of rewards; index as i">
+                <button [disabled]="reward.payload.doc.data().points>points.points" (click)="redeem(reward)">Redeem!</button>
                     {{reward.payload.doc.data().title}}
-                <span data-toggle="collapse" href="#collapse">Read More...</span>
+                <span data-toggle="collapse" data-target="#toggle">Read More...</span>
     
      
     <!--            //COLLAPSE BUG NEEDS FIXING-->
@@ -17,7 +17,7 @@
                 <span class="badge badge-pill badge-success">
                         {{reward.payload.doc.data().points}}
                 </span>    
-                <div class="collapse" id="collapse">
+                <div class="collapse" id="toggle">
                     <div class="card card-body">
                             {{reward.payload.doc.data().description}}
                     </div>
