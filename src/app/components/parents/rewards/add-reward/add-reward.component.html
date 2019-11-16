@@ -1,6 +1,8 @@
 <div class="form centerForm">
-    <h1>Add a New Reward</h1>
-    <form [formGroup]="add" (ngSubmit)="onAdd(add)">
+    <h1 *ngIf="!edit" >Add a New  Reward for {{child}}</h1>
+    <h1 *ngIf="edit" >Edit Reward for {{child}}</h1>
+
+    <form [formGroup]="rewardForm" (ngSubmit)="onAdd(rewardForm)">
         <div class="form-group">
             <label>Title: </label>
             <input placeholder="Title"
@@ -18,5 +20,5 @@
                    required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form> 
 </div>

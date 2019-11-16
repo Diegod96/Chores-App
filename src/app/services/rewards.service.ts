@@ -12,6 +12,13 @@ import * as firebase from 'firebase';
 })
 export class RewardsService {
 
+  edit
+  title;
+  description;
+  points;
+  due;
+  currentRewardID;
+
   constructor(private firestore: AngularFirestore,
               private childService: ChildService,
               private parentService: ParentService,
@@ -22,6 +29,21 @@ export class RewardsService {
   getChildRewards() {
     return this.firestore.collection('rewards', ref => ref.where('childID', '==', this.childService.childID))
         .snapshotChanges();
+}
+
+setEdit(x){
+  this.edit=x;
+}
+
+setCurrentRewardToEdit(reward){
+  this.edit=true;
+  this.title= reward.payload.doc.data().title;
+  this.description= reward.payload.doc.data().description;
+  this.points= reward.payload.doc.data().points;
+  this.currentRewardID= reward.payload.doc.id;
+
+  console.log(this.edit, this.title, this.description, this.points,
+    this.due, this.currentRewardID)
 }
 
 
@@ -43,6 +65,18 @@ export class RewardsService {
 
   }
 
+
+  editReward(form) {
+    this.firestore.collection('rewards').doc(this.currentRewardID).update({
+        title: form.value.title,
+        description: form.value.description,
+        points: form.value.points
+    }).then( res => {console.log('Reward updated'); })
+        .catch(function(error) {
+            console.error('Error updating chore', error);
+        });
+}
+
   redeem(reward) {
     const points  = Number(reward.payload.doc.data().points);
     const decrement = firebase.firestore.FieldValue.increment(0-points);
@@ -52,7 +86,7 @@ export class RewardsService {
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
-
+ 
     this.firestore.collection('points').doc(this.authService.uid).update({
       points: decrement
     }).then( res => {console.log('Status updated'); })
@@ -61,16 +95,5 @@ export class RewardsService {
     });
   }
 
-  edit(reward) {
-
-    //HARD CODED TO DATA-BASE UPDATE
-
-    this.firestore.collection('rewards').doc(reward.payload.doc.id).update({
-      //title: 'Pizza'
-    }).then( res => {console.log('Reward updated'); })
-        .catch(function(error) {
-          console.error('Error updating reward', error);
-        });
-  }
 
 }

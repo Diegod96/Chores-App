@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'rewards', pathMatch: 'full', component: RewardsComponent},
   {path: 'child-rewards', pathMatch: 'full', component: ChildRewardsComponent},
   {path: 'add-chore/:choreID', pathMatch: 'full', component: AddChoreComponent},
-  {path: 'add-reward', pathMatch: 'full', component: AddRewardComponent},
+  {path: 'add-reward/:rewardID', pathMatch: 'full', component: AddRewardComponent},
   {path: 'manage', pathMatch: 'full', component: ManageComponent}
 
 ];

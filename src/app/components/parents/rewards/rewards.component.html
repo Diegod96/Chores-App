@@ -50,11 +50,11 @@
                 </span></h1>
         <ul>
             <li *ngFor="let reward of rewards">
-                <button (click)="edit(reward.title)">Edit</button>
+                <button (click)="edit(reward)">Edit</button>
                     {{reward.payload.doc.data().title}}
                 <span data-toggle="collapse" href="#collapse">Read More...</span>
     
-    
+     
     <!--            //COLLAPSE BUG NEEDS FIXING-->
     
                 <span class="badge badge-pill badge-success">

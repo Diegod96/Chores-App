@@ -4,6 +4,7 @@ import {PointsService} from '../../../services/points.service';
 import {AuthService} from '../../../services/auth.service';
 import {ParentService} from '../../../services/parent.service';
 import { ChildService } from 'src/app/services/child.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,7 @@ import { ChildService } from 'src/app/services/child.service';
   styleUrls: ['./rewards.component.css']
 })
 export class RewardsComponent implements OnInit {
-
-  // rewards;
-  // points;
-  // user;
-  // children;
+ 
 
   user;
   child;
@@ -28,11 +25,8 @@ export class RewardsComponent implements OnInit {
               private pointsService: PointsService,
               private authService: AuthService,
               private parentService: ParentService,
-              private childService: ChildService) {
-    // this.rewards = rewardService.rewards;
-    // this.points = pointsService.points;
-    // this.user = this.authService.user;
-    // this.children = this.parentService.children;
+              private childService: ChildService,
+              private router: Router) {
 
     this.user= authService.user;
     this.child= childService.childName;
@@ -49,9 +43,17 @@ export class RewardsComponent implements OnInit {
       this.getRewards();
   }
 
-  edit(title) {
-    // this.rewardService.edit(title);
-  }
 
+  edit(reward) {
+
+    const promise1 = Promise.resolve(
+      this.rewardService.setCurrentRewardToEdit(reward));
+    
+    promise1.then(res =>{
+      this.router.navigate(['add-reward', reward.payload.doc.id])})
+      .catch(error => {
+      console.error('onRejected function called: ' + error.message);}
+      ) 
+  }
 
 }

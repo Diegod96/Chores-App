@@ -60,7 +60,7 @@ export class AddChoreComponent implements OnInit {
   // get due() {
   //   return this.choreForm.get('due');
   // }
-
+ 
 
   onAdd(form) {
 

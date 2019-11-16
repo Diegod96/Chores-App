@@ -119,7 +119,7 @@ export class ChoresService {
           console.error('Error updating chore', error);
       });
   }
-
+ 
   editChores(chore) {
 
       this.firestore.collection('chores').doc(this.currentChoreID).update({
