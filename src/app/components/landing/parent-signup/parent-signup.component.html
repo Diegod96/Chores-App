@@ -1,20 +1,51 @@
+
 <div class="form centerForm">
         <h1>Parent Sign Up</h1>
         <form [formGroup]="signUp" (ngSubmit)="onSignUp(signUp)">
             <div class="form-group">
                 <label>Email: </label>
-                <input placeholder="email"
+                <input placeholder="john.doe@example.com"
                        formControlName="email"
-                       required>
+                       required
+                       pattern="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}">
+                       <div *ngIf="email.invalid && (signUp.submitted || email.touched)" class="alert alert-danger">
+                               <div *ngIf="email.errors.required"> Email address is required.</div>
+                               <div *ngIf="email.errors.pattern"> Please enter a valid email address.</div>
+                            </div>
+                          
+<!-- 
+                                <div *ngIf="email.invalid && email.dirty" class="alert alert-danger">
+                                            {{ email.value }} is already in use.
+                                        </div> -->
+                        
+                       </div>
+                <br>
+            <div class="form-group">
+                <label>Password: </label>
+                <input type="password" 
+                formControlName="password"
+                name="password"
+                placeholder="Password"
+                required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+                <div *ngIf="password.invalid && (signUp.submitted || password.touched)" class="alert alert-danger">
+                        <div *ngIf="password.errors.required"> Password is required. </div>
+                        <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+                        </div>
+                </div>
                 <br>
             </div>
             <div class="form-group">
-                <label>Password: </label>
+                <label>Confirm Password: </label>
                 <input type="password"
-                       placeholder="password"
-                       formControlName="password"
-                       required>
-                <br>
+                       formControlName="confirmation"
+                       name="confirmPassword"
+                       placeholder="Confirm Password"
+                       pattern="{{ password.value }}"/>
+                <div *ngIf="confirmation.invalid && (signUp.submitted || confirmation.touched)" class="alert alert-danger">
+                <div *ngIf="confirmation.errors.required"> Confirm password is required. </div>
+                <div *ngIf="confirmation.errors.pattern"> Passwords do not match.</div>
+            </div> 
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
