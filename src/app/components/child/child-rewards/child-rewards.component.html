@@ -1,65 +1,36 @@
 <<<<<<< HEAD
 <div id="container">
+ts
+      ints}} pMy Rewards
+{{points.poan *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
+           {{points.points}} pts
+        </span>
 
-        <h1>My Rewards
-            <span *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
-               {{points.points}} pts
-            </span>
-        </h1> 
-        <ul>
-            <li *ngFor="let reward of rewards; index as i">
-                <button [disabled]="reward.payload.doc.data().points>points.points" (click)="redeem(reward)">Redeem!</button>
-                    {{reward.payload.doc.data().title}}
-                <span data-toggle="collapse" data-target="#toggle">Read More...</span>
-    
-     
-    <!--            //COLLAPSE BUG NEEDS FIXING-->
-    
-                <span class="badge badge-pill badge-success">
-                        {{reward.payload.doc.data().points}}
-                </span>    
-                <div class="collapse" id="toggle">
-                    <div class="card card-body">
-                            {{reward.payload.doc.data().description}}
-                    </div>
-                </div>
-            </li>
-    
-        </ul>
-    
-    </div>
-    
-    
-=======
-<div id="container">
+   </h1> 
+ccess">
 
-        <h1>My Rewards
-            <span *ngIf="pointsLoaded | async" style="float: right" class="badge badge-pill badge-success">
-               {{points.points}} pts
-            </span>
-        </h1>
-        <ul>
-            <li *ngFor="let reward of rewards">
-                <button [disabled]="reward.payload.doc.data().points>10" (click)="redeem(reward)">Redeem!</button>
-                    {{reward.payload.doc.data().title}}
-                <span data-toggle="collapse" href="#collapse">Read More...</span>
+ill badge-su*ngFor="let reward of rewards; index as i">
+s="badge badge-pton [disabled]="reward.payload.doc.data().points>points.points" (click)="redeem(reward)">Redeem!</button>
+ right" clas    {{reward.payload.doc.data().title}}
+            <span data-toggle="collapse" data-target="#toggle">Read More...</span>
+:
+ 
+<!--            //COLLAPSE BUG NEEDS FIXING-->
+style="float          intsLoaded | async" ass="badge badge-pill badge-success">
+an *ngIf="po        {{reward.payload.doc.data().points}}
+         <sp</span>    
+>My Rewards
+    class="collapse" id="toggle">
+ntainer">
+
+        <h1ss="card card-body">
+===
+<div id="co        {{reward.payload.doc.data().description}}
+
     
-     
-    <!--            //COLLAPSE BUG NEEDS FIXING-->
-    
-                <span class="badge badge-pill badge-success">
-                        {{reward.payload.doc.data().points}}
-                </span>    
-                <div class="collapse" id="collapse">
-                    <div class="card card-body">
-                            {{reward.payload.doc.data().description}}
-                    </div>
-                </div>
-            </li>
-    
-        </ul>
-    
-    </div>
-    
-    
->>>>>>> abef03f61cf046babb079a5de289f89ee3f94439
+====    </div>
+v>
+        </div>
+        </li>
+</di      </ul>
+
