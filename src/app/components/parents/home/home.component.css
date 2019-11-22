@@ -11,10 +11,25 @@
 .cpButtons{
     font-family: 'McLaren', cursive;
     border: black solid 3px;
-    background-color: black;
+    background-color: #0291eb;
     color: white;
     text-align: center;
     font-size: larger;
     margin: 10px;
+}
+
+#id{
+    background-color: black;
+    color: white;
+
+}
+.message{
+    display: block;
+    font-family: 'Bowlby One SC', cursive;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
 }
  

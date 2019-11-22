@@ -9,10 +9,7 @@ import {ParentService} from '../../../services/parent.service';
 export class ManageComponent implements OnInit {
 
 
-  children;
-
   constructor( private parentService: ParentService) {
-    this.children = parentService.children;
   }
 
   ngOnInit() {

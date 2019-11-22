@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import { PointsService } from './points.service';
+import { ParentService } from './parent.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ChildService {
   childName;
   childPoints;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,
+              private parentService: ParentService) { }
 
     setChildNameIDPoints(docId, ID, name, points){
       this.docID=docId;
@@ -50,27 +52,7 @@ export class ChildService {
     .catch(function(error) {
       console.error('Error writing document: ', error);
     });
-   }
-
+  }
 
   }
-   
-
-  //  addChild(parentID, childName, childID){
-  //   this.firestore.collection('children')
-  //   .add({
-  //     name: childName,
-  //     points: 0,
-  //     user: 'child',
-  //     childID: childID,
-  //     parentID: parentID
-  //   })
-  //   .then(function() {
-  //     console.log('Document successfully written!');
-  //   })
-  //   .catch(function(error) {
-  //     console.error('Error writing document: ', error);
-  //   });
-  //  }
-
 

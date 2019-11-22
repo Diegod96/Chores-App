@@ -25,6 +25,7 @@ import { HomeComponent } from './components/parents/home/home.component';
 import { ManageThisChildComponent } from './components/parents/manage-this-child/manage-this-child.component';
 import { ChildRewardsComponent } from './components/child/child-rewards/child-rewards.component';
 import {PointsService} from './services/points.service';
+import {AboutComponent} from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {PointsService} from './services/points.service';
     ParentSignupComponent,
     HomeComponent,
     ManageThisChildComponent,
-    ChildRewardsComponent
+    ChildRewardsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

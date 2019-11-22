@@ -1,0 +1,51 @@
+<img src="../../../assets/DinoChoresLogo.png" alt="DinoChores Logo" class="center">
+
+<div *ngIf="user=='parent'" class="center">
+
+        <h1>Hey there Mom, Dad or Guardian, welcome to DinoChores!</h1>
+
+        <div>
+            <h4>Sign Up A New Child Account</h4>   
+            <p>Copy this ID: {{parentID}}</p>
+            <p>and make your little dinosaur an account so you can start adding chores!</p>
+        </div> 
+        <div>
+            <h4>How's It Work?</h4>   
+            <p>Once you've added your children's accounts you'll be able to log in here, 
+                add a chores list and decide on rewards your children will be able to earn. 
+                Your child/ren will be able to log into their accounts, view the chores and send you
+                a 'completion' request when they have done their chore. Once that's pending, you 
+                can review if the chore has been done and approve it which will award them points.
+            </p>
+            <p>
+                If your child is late on completing their chore you will have the option to extend their deadling
+                or deduct points from their account. 
+            </p>
+            <p>
+                Once they have earned enough points, your child/ren will be able to redeem them
+                for the reward you've set!
+            </p>
+        </div> 
+</div>
+
+
+
+<div *ngIf="user=='child'">
+
+
+        <h1>Hey there, welcome to DinoChores!</h1>
+
+        <div>
+            <h4>How's It Work?</h4>   
+            <p>Go on over to the "Chores" tab to see what your parents need your help with! Once you finished 
+                your chore, click on 'complete.' Your parents will make sure you finished it and then you'll
+                get points. Be careful though, if you don't finish the chore before the due date you could lose points.
+            </p>
+            <p>
+                Once you have enough points, head on over to the "Rewards" tab where you can redeem
+                them for rewards your parents set. Cool right? 
+            </p>
+        </div> 
+
+
+</div>

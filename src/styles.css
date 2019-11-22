@@ -2,18 +2,53 @@
 
 
 body{
-
-    background-color: #f9ea8f;
+    background-image: url('assets/Mango.jpg');
+    /* background-color: #f9ea8f;
     background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%);
-    font-family: 'McLaren', cursive;
+    font-family: 'McLaren', cursive; */
 }
-
-
-
 .centerForm {
     display: block;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+
+
+.nav{
+    height:60px;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+    /* margin-right: 5px; */
+    /* margin-top: 5px; */
+    float: right;
+
+    background: #0291eb;
+    border: 2px solid #0291eb;
+    color: white;
+    text-align: center;
+
+
+}
+
+.navbar{
+    font-family: 'McLaren', cursive;
+    font-size: larger;
+}
+
+#navLogo{
+    margin-left: 10px;
+    margin-top: 5px; 
+    height: 35px;
 }

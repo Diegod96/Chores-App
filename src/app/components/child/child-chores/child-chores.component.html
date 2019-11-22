@@ -14,7 +14,7 @@
                 " (click)="complete(chore, chore.payload.doc.data().points)" disabled>Pending Approval</button>
 
                 <span data-toggle="collapse" href="#collapse">{{chore.payload.doc.data().title}}</span>
-                <span class="right">Due: {{chore.payload.doc.data().due.seconds*1000 |  date:'EEEE MMM d, y, h:mm:ss a'}}
+                <span class="right">Due: {{chore.payload.doc.data().due.seconds*1000 |  date:'EEEE MMM d, y, h:mm a'}}
                     <span class="badge badge-pill badge-success">{{chore.payload.doc.data().points}}pts</span>
                 </span>
                 <div class="collapse" id="collapse">

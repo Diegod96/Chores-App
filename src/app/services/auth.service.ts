@@ -11,17 +11,17 @@ import { PointsService } from './points.service';
 export class AuthService {
 
   token;
-
-  ///ERRORS W/ USER- FIX THIS
-
-  user= 'child';
+  user;
   uid;
+
 
   constructor(private router: Router,
               private childService: ChildService,
               private parentService: ParentService,
               private pointsService: PointsService) {
+
   }
+
 
   signUpParent(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -36,7 +36,7 @@ export class AuthService {
           }).then( 
             response =>{
               this.parentService.addParent(email, this.uid);
-              this.router.navigate(['home']);
+              this.router.navigate(['about']);
             })
           .catch(
           error => {
@@ -78,7 +78,8 @@ export class AuthService {
                         this.uid = firebase.auth().currentUser.uid;
                         this.user= user;
                         if(user=='parent'){
-                          this.parentService.setParentID(firebase.auth().currentUser.uid);}
+                          this.parentService.setParentID(this.uid);
+                        }
                         else {
                           this.childService.setChildID(firebase.auth().currentUser.uid)
                         }

@@ -13,6 +13,7 @@ import { ChildChoresComponent } from './components/child/child-chores/child-chor
 import { HomeComponent } from './components/parents/home/home.component';
 import { ManageThisChildComponent } from './components/parents/manage-this-child/manage-this-child.component';
 import { ChildRewardsComponent } from './components/child/child-rewards/child-rewards.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: LandingComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
 
   {path: 'child-chores', pathMatch: 'full', component: ChildChoresComponent},
   {path: 'home', pathMatch: 'full', component: HomeComponent},
+  {path: 'about', pathMatch: 'full', component: AboutComponent},
 
   {path: 'child/:childID', component: ManageThisChildComponent},
 

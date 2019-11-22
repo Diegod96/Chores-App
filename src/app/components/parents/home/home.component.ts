@@ -3,6 +3,9 @@ import { ParentService } from 'src/app/services/parent.service';
 import { ChoresService } from 'src/app/services/chores.service';
 import { ChildService } from 'src/app/services/child.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import {Observable} from 'rxjs';
+import { initializeApp } from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +15,18 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   
   children;
+  parentID;
+  childrenSet;
 
   constructor(private parentService: ParentService,
               private choreService: ChoresService,
               private router: Router,
-              private childService: ChildService
+              private childService: ChildService,
+              private authService: AuthService
               ) {
-    // this.children= parentService.children;
+    this.parentID= authService.uid;
   }
+
 
 select(docID, ID, name, points){
   const promise1 = Promise.resolve(
@@ -32,6 +39,12 @@ select(docID, ID, name, points){
     ) 
 }
 
+// async init(){
+
+//   return Promise.resolve(
+//     this.parentService.getChildren()
+//     );
+// }
 
 getChildren = () =>
 this.parentService.getChildren().subscribe(res => (
@@ -40,5 +53,6 @@ this.parentService.getChildren().subscribe(res => (
   ngOnInit() {
     this.getChildren();
   }
+
 
 }

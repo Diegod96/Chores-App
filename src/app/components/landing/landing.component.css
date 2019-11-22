@@ -10,11 +10,12 @@
 
 .cpButtons{
     font-family: 'McLaren', cursive;
+    /* font-family: 'Bowlby One SC', cursive; */
     border: black solid 3px;
-    background-color: black;
+    background-color: #0291eb;
     color: white;
     text-align: center;
-    font-size: larger;
+    font-size: 20px;
     margin: 10px;
 }
  

@@ -58,6 +58,10 @@ getChores = () =>
 
 }
 
+add() {
+    this.router.navigate(['add-chore', this.childService.childID])
+}
+
 
   //ADD EDIT FUNCTIONALITY
   edit(chore) {

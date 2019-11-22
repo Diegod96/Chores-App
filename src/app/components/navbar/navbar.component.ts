@@ -32,7 +32,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.user=='child'){
     this.getPoints();
   }
 
+}
 }
