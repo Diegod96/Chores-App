@@ -7,7 +7,7 @@
                 <input placeholder="john.doe@example.com"
                        formControlName="email"
                        required
-                       pattern="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}">
+                       pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
                        <div *ngIf="email.invalid && (signUp.submitted || email.touched)" class="alert alert-danger">
                                <div *ngIf="email.errors.required"> Email address is required.</div>
                                <div *ngIf="email.errors.pattern"> Please enter a valid email address.</div>

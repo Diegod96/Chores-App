@@ -43,12 +43,23 @@ return this.signUp.get('password');
 onSignUp(form) {
   const email = form.value.email;
   const password = form.value.password;
-  const parentID= form.value.parentID;
-  const name= form.value.name;
-  this.authService.signUpChild(email, password, parentID, name);
+  const confirmation = form.value.confirmation;
+  const parentID = form.value.parentID;
+  const name = form.value.name;
+  const promise = Promise.resolve(this.authService.signUpChild(email, password, parentID, name));
 
-  console.log(email, password, parentID, name);
-  this.router.navigate(['child-chores']);
+
+  promise.then(res => {
+    this.router.navigate(['home']);
+  }).catch(err => {
+    alert (err.message);
+  });
+  // this.authService.signUpChild(email, password, parentID, name);
+
+  
+
+  // console.log(email, password, parentID, name);
+  // this.router.navigate(['child-chores']);
 }
 
 ngOnInit() {
