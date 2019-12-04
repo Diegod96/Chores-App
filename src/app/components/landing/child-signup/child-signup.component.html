@@ -1,70 +1,67 @@
-<div class=container>
-    <div class="form centerForm">
-            <h1>Child Sign Up</h1>
-            <form [formGroup]="signUp" (ngSubmit)="onSignUp(signUp)">
-                    <div class="form-group">
-                            <label>Parent ID: </label>
-                            <input placeholder="ID"
-                                   formControlName="parentID"
-                                   required type="text"
-                                   class="form-control">
-                                   <div *ngIf="(parentID.dirty || parentID.touched) && parentID.invalid && parentID.errors.required" class="alert alert-danger">Parent ID is required.</div>
-                            <br>
-                        </div>
-               
-                <div class="form-group">
-                    <label>Email: </label>
-                    <input placeholder="john.doe@example.com"
-                           formControlName="email"
-                           required type="email"
-                           class="form-control"
-                           pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
-                           <div *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required" class="alert alert-danger">Email address is required.</div>
-                           <div *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.email" class="alert alert-danger">Please enter a valid email address.</div>
-                    <br>
-                </div>
-    
-                <div class="form-group">
-                        <label>Name: </label>
-                        <input placeholder="first and last name"
-                               formControlName="name"
-                               class="form-control"
-                               required type="text">
-                               <div *ngIf="(name.dirty || name.touched) && name.invalid && name.errors.required" class="alert alert-danger">Name is required.</div>
-                        <br>
-                    </div>
-    
-                    <div class="form-group">
-                        <label>Password: </label>
-                        <input type="password" 
-                        formControlName="password"
-                        name="password"
-                        placeholder="Password"
-                        ng-minlength="8"
-                        required type="password"
-                        class="form-control"
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
-                        <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required" class="alert alert-danger">Password is required.</div>
-                        <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.pattern" class="alert alert-danger">Password must be a minimun of 8 characters (letters and numbers).</div>
-                    <br>
-                </div>
-                <div class="form-group">
-                    <label>Confirm Password: </label>
-                    <input type="password"
-                            formControlName="confirmation"
-                            name="confirmPassword"
-                            placeholder="retype password"
-                            ng-minlength="8"
-                            required type="password"
-                            class="form-control"
-                            pattern="{{ password.value }}"/>
-                            <div *ngIf="(confirmation.dirty || confirmation.touched) && confirmation.invalid && confirmation.errors.pattern" class="alert alert-danger">Passwords do not match</div>
-                               
-                    <br>
-    
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    
-    </div> 
+<div class="form centerForm">
+        <h1>ChildSign Up</h1>
+        <form [formGroup]="signUp" (ngSubmit)="onSignUp(signUp)">
+            <div class="form-group">
+                <label>Parent ID:</label>
+                <input placeholder="ID"
+                formControlName="parentID"
+                required 
+                type="text">
+                <div *ngIf="parentID.invalid && (signUp.submitted || parentID.touched)" class="alert alert-danger">
+                <div *ngIf="email.errors.required"> Parent ID is required.</div>
+                </div>
+       </div>
+       <br>
+            <div class="form-group">
+                <label>Email: </label>
+                <input 
+                placeholder="john.doe@example.com"
+                formControlName="email"
+                required>
+                <div *ngIf="email.invalid && (signUp.submitted || email.touched)" class="alert alert-danger">
+                    <div *ngIf="email.errors.required"> Email address is required.</div>
+                    <div *ngIf="email.errors.email"> Please enter a valid email address.</div>
+                </div>
+            </div>
+        <br>
+        <div class="form-group">
+        <label>Name: </label>
+            <input placeholder="First and Last name"
+                   formControlName="name"
+                   name="name"
+                    required 
+                    type="text">
+                    <div *ngIf="name.invalid && (signUp.submitted || name.touched)" class="alert alert-danger">
+                        <div *ngIf="name.errors.required"> Name is required. </div>
+                    </div> 
+            </div>
+            <br>
+            <div class="form-group">
+                <label>Password: </label>
+                <input type="password" 
+                formControlName="password"
+                name="password"
+                placeholder="Password"
+                required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+                <div *ngIf="password.invalid && (signUp.submitted || password.touched)" class="alert alert-danger">
+                        <div *ngIf="password.errors.required"> Password is required. </div>
+                        <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label>Confirm Password: </label>
+                <input type="password"
+                       formControlName="confirmation"
+                       name="confirmPassword"
+                       placeholder="Confirm Password"
+                       pattern="{{ password.value }}"/>
+                <div *ngIf="confirmation.invalid && (signUp.submitted || confirmation.touched)" class="alert alert-danger">
+                    <div *ngIf="confirmation.errors.required"> Confirm password is required. </div>
+                    <div *ngIf="confirmation.errors.pattern"> Passwords do not match.</div>
+                </div> 
+            </div>
+            <button [disabled]="!signUp.valid" type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+</div> 
